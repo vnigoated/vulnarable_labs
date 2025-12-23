@@ -1,0 +1,48 @@
+<div id="step-0">
+    <h3 class="text-dim">[ PHASE 1: INTELLIGENCE ]</h3>
+
+    <h4>THEORY: IDOR</h4>
+    <p>Insecure Direct Object References (IDOR) occur when an application uses client-supplied input to access objects
+        directly. If authorization checks are missing, attackers can access unauthorized data.</p>
+
+    <h4>OBJECTIVE</h4>
+    <p>Access the profile of the <strong>SOVAP ADMIN</strong> (ID: 102) to retrieve the flag.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-1', this)">[ UNLOCK HINT 1 ]</button>
+
+<div id="step-1" class="hidden-section">
+    <h4>HINT 1: SESSION ANALYSIS</h4>
+    <ul>
+        <li>You are currently logged in as Guest (ID 101).</li>
+        <li>Check your <strong>Cookies</strong> in the Developer Tools (Application Tab).</li>
+        <li>Look for <code>profile_view_token</code>.</li>
+        <li>The value looks like scrambled text ending in <code>=</code>. This is typically <strong>Base64</strong>.
+        </li>
+    </ul>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-2', this)">[ UNLOCK HINT 2 ]</button>
+
+<div id="step-2" class="hidden-section">
+    <h4>HINT 2: DECODING</h4>
+    <p>Decode the Base64 value. It reveals a JSON object:</p>
+    <pre>{"user_id": 101, "role": "user"}</pre>
+    <p>The application blindly trusts this <code>user_id</code>. If you change it to the Admin's ID (check the 'Intel'
+        or guess 102), and re-encode it, you might become Admin.</p>
+</div>
+
+<button class="hint-btn text-alert" onclick="reveal('step-3', this)">[ REVEAL SOLUTION ]</button>
+
+<div id="step-3" class="hidden-section" style="border-color: var(--sovap-alert);">
+    <h4 class="text-alert">FULL EXECUTION PLAN</h4>
+    <ol>
+        <li>Open DevTools -> Storage -> Cookies.</li>
+        <li>Copy existing value of <code>profile_view_token</code>.</li>
+        <li>Use Console/CyberChef to decode: <code>atob('VALUE')</code>.</li>
+        <li>Change <code>101</code> to <code>102</code>.</li>
+        <li>Re-encode: <code>btoa('{"user_id":102,"role":"user"}')</code>.</li>
+        <li>Paste the new value back into the cookie.</li>
+        <li>Refresh the page.</li>
+    </ol>
+</div>

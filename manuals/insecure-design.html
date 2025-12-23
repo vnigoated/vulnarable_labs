@@ -1,0 +1,41 @@
+<div id="step-0">
+    <h3 class="text-dim">[ PHASE 1: BUSINESS LOGIC ]</h3>
+
+    <h4>THEORY: LOGIC FLAWS</h4>
+    <p>Security is not just about bugs like SQLi; it's also about design. If a checkout process assumes "A user can only
+        add a coupon once" but doesn't enforce it on the server, that's a vulnerability.</p>
+
+    <h4>OBJECTIVE</h4>
+    <p>Purchase the <strong>Neural Link</strong> ($5000) for $0.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-1', this)">[ UNLOCK HINT 1 ]</button>
+
+<div id="step-1" class="hidden-section">
+    <h4>HINT 1: COUPON STACKING</h4>
+    <p>The code <code>SAVE10</code> gives a 10% discount. The UI disables the button after you use it once.</p>
+    <p>But what if you send the request manually without the UI?</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-2', this)">[ UNLOCK HINT 2 ]</button>
+
+<div id="step-2" class="hidden-section">
+    <h4>HINT 2: PARAMETER POLLUTION</h4>
+    <p>The backend stores coupons in an array. It might blindly accept multiple parameters with the same name.</p>
+    <p>Try sending <code>code=SAVE10</code> multiple times in a single POST request.</p>
+</div>
+
+<button class="hint-btn text-alert" onclick="reveal('step-3', this)">[ REVEAL SOLUTION ]</button>
+
+<div id="step-3" class="hidden-section" style="border-color: var(--sovap-alert);">
+    <h4 class="text-alert">FULL EXECUTION PLAN</h4>
+    <ol>
+        <li>Open Burp Suite or use a simple HTML form hack.</li>
+        <li>Create a request to <code>/lab/insecure-design/apply</code>.</li>
+        <li>Body: <code>code=SAVE10&code=SAVE10&...</code> (Repeat 10 times).</li>
+        <li>Or use Curl:</li>
+    </ol>
+    <pre>curl -X POST http://localhost:3000/lab/insecure-design/apply \
+  -d "code=SAVE10" \
+  -d "code=SAVE10" ... </pre>
+</div>

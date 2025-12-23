@@ -1,0 +1,36 @@
+<div id="step-0">
+    <h3 class="text-dim">[ PHASE 1: VULNERABILITY IDENTIFICATION ]</h3>
+
+    <h4>THEORY: RCE via EVAL</h4>
+    <p><code>eval()</code> allows executing arbitrary code. If user input is passed to it, the user can run any command
+        the server process can.</p>
+
+    <h4>OBJECTIVE</h4>
+    <p>Execute file system commands to list the directory contents.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-1', this)">[ UNLOCK HINT 1 ]</button>
+
+<div id="step-1" class="hidden-section">
+    <h4>HINT 1: JAVASCRIPT EXECUTION</h4>
+    <p>Since the backend is Node.js, you can run JavaScript code.</p>
+    <p>Try entering <code>global.process.version</code> to see if it returns the Node version.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-2', this)">[ UNLOCK HINT 2 ]</button>
+
+<div id="step-2" class="hidden-section">
+    <h4>HINT 2: MODULE ACCESS</h4>
+    <p>Node.js has a module <code>child_process</code> that can run OS commands.</p>
+    <p>You can require it directly if the sandbox is weak: <code>require('child_process')</code>.</p>
+</div>
+
+<button class="hint-btn text-alert" onclick="reveal('step-3', this)">[ REVEAL SOLUTION ]</button>
+
+<div id="step-3" class="hidden-section" style="border-color: var(--sovap-alert);">
+    <h4 class="text-alert">FULL EXECUTION PLAN</h4>
+    <p>Enter the following payload into the calculator:</p>
+    <pre>require('child_process').execSync('dir').toString()</pre>
+    <p>(Use <code>ls</code> instead of <code>dir</code> if on Linux/Mac).</p>
+    <p>The result will show the file listing of the server.</p>
+</div>

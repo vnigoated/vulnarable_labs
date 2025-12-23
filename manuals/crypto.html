@@ -1,0 +1,45 @@
+<div id="step-0">
+    <h3 class="text-dim">[ PHASE 1: ANALYSIS ]</h3>
+
+    <h4>THEORY: WEAK CRYPTO</h4>
+    <p>Encryption relies on secret keys and robust algorithms. Using a weak algorithm (like simple XOR) or a hardcoded
+        key destroys security.</p>
+
+    <h4>OBJECTIVE</h4>
+    <p>Decrypt the note from the <strong>admin</strong> user.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-1', this)">[ UNLOCK HINT 1 ]</button>
+
+<div id="step-1" class="hidden-section">
+    <h4>HINT 1: SOURCE CODE REVIEW</h4>
+    <p>Look at the "Leaked Source Code" section at the bottom of the lab page. It shows exactly how the encryption
+        works.</p>
+    <pre>result += String.fromCharCode(char ^ key)</pre>
+    <p>It uses XOR encryption with a fixed key: <code>42</code>.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-2', this)">[ UNLOCK HINT 2 ]</button>
+
+<div id="step-2" class="hidden-section">
+    <h4>HINT 2: DECRYPTION LOGIC</h4>
+    <p>XOR is symmetric. To decrypt, you just perform the same operation again.</p>
+    <p><code>Ciphertext XOR Key = Plaintext</code></p>
+    <p>You need to take the Base64 ciphertext strings from the table, decode them, and XOR each byte by 42.</p>
+</div>
+
+<button class="hint-btn text-alert" onclick="reveal('step-3', this)">[ REVEAL SOLUTION ]</button>
+
+<div id="step-3" class="hidden-section" style="border-color: var(--sovap-alert);">
+    <h4 class="text-alert">FULL EXECUTION PLAN</h4>
+    <p>Run this script in your browser console:</p>
+    <pre style="background:#111; padding:0.5rem; border:1px solid #333;">
+let cipher = atob("THE_BASE64_STRING_FROM_TABLE");
+let key = 42;
+let plain = "";
+for(let i=0; i < cipher.length; i++) {
+    plain += String.fromCharCode(cipher.charCodeAt(i) ^ key);
+}
+console.log(plain);
+</pre>
+</div>

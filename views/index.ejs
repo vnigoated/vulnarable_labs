@@ -1,0 +1,25 @@
+<div class="hero" style="text-align: center; margin-bottom: 3rem;">
+    <h1 style="font-size: 3rem; margin-bottom: 0.5rem; text-shadow: 0 0 10px #0f0;">SOVAP CYBER LABS</h1>
+    <p style="font-size: 1.2rem; color: #fff;">AUTHORIZED PERSONNEL ONLY</p>
+    <p class="text-alert">WARNING: LIVE VULNERABILITIES DETECTED</p>
+</div>
+
+<div class="lab-grid">
+    <% labs.forEach(lab=> { %>
+        <div class="card">
+            <h3>
+                <%= lab.name %>
+            </h3>
+            <p class="text-dim">
+                <%= lab.desc %>
+            </p>
+            <div style="margin-top: 1rem;">
+                <span class="status-badge" style="border-color: #0f0; color: #0f0;">ACTIVE</span>
+                <span class="status-badge" style="border-color: orange; color: orange;">
+                    <%= lab.diff %>
+                </span>
+            </div>
+            <a href="/lab/<%= lab.id %>" class="btn">ACCESS LAB ></a>
+        </div>
+        <% }) %>
+</div>

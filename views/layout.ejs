@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %> | SOVAP CYBER LABS
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Embedded overrides if needed */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                SOVAP_<span>LABS</span>
+            </div>
+            <div class="status-panel">
+                <span class="status-badge">System: SECURE</span>
+                <span class="status-badge">Auth: SOVAP_ROOT</span>
+                <span class="status-badge">User: Guest-<%= Math.floor(Math.random() * 1000) %></span>
+            </div>
+            <nav>
+                <a href="/">[ HOME ]</a>
+            </nav>
+        </header>
+
+        <main>
+            <%- body %>
+        </main>
+
+        <footer
+            style="margin-top: 4rem; border-top: 1px solid #0f0; padding-top: 1rem; text-align: center; font-size: 0.8rem;">
+            <p>PROPERTY OF SOVAP CORPORATION. UNAUTHORIZED ACCESS IS A VIOLATION OF PROTOCOL 77.</p>
+            <p class="text-dim">Secure Operations Verification & Attack Platform (SOVAP)</p>
+        </footer>
+    </div>
+
+    <!-- Manual Sidebar -->
+    <div id="manual-sidebar">
+        <div class="sidebar-header">
+            <h3 id="sidebar-title" style="margin:0;">MISSION BRIEFING</h3>
+            <span class="close-modal" onclick="closeSidebar()" style="position:static; font-size:1.5rem;">&times;</span>
+        </div>
+        <div id="sidebar-content" class="sidebar-content">
+            <!-- Content injected here -->
+        </div>
+    </div>
+
+    <script>
+        function showManual(title, rawContent) {
+            document.getElementById('sidebar-title').innerText = "OP: " + title;
+            document.body.classList.add('sidebar-active');
+            document.getElementById('manual-sidebar').classList.add('open');
+
+            // Parse content for progressive disclosure
+            // Assuming strict structure: <intro>, <hint1>, <hint2>, <solution>
+            // But since current files are flat HTML, let's wrap them dynamically or expect updated HTML.
+            // For now, let's render rawContent but look for specific dividers if present.
+            // We'll update the HTML files to include specific classes/ids.
+
+            const container = document.getElementById('sidebar-content');
+            container.innerHTML = rawContent;
+
+            // Re-bind buttons if they exist in the injected content?
+            // Actually, better to just inject the HTML which already has "onclick" or manage visibility here.
+            // Let's implement a helper to manage the steps if the HTML structure supports it.
+            // We will update the HTML files to basically be:
+            // <div id="step-0">Theory...</div>
+            // <div id="step-1" class="hidden-section">Hint 1...</div>
+            // <button onclick="reveal('step-1', this)">Show Hint 1</button>
+        }
+
+        function closeSidebar() {
+            document.getElementById('manual-sidebar').classList.remove('open');
+            document.body.classList.remove('sidebar-active');
+        }
+
+        function reveal(stepId, btn) {
+            document.getElementById(stepId).style.display = 'block';
+            if (btn) btn.style.display = 'none'; // Hide the button after revealing
+        }
+    </script>
+</body>
+
+</html>

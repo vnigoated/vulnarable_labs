@@ -1,0 +1,13 @@
+version: '3'
+services:
+  sovap-labs:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - SOVAP_API_KEY=sk_live_892348572345
+      - SOVAP_ADMIN_SECRET=SuperSecretBackdoorKey
+      - FLAG_MISCONFIG=SOVAP_ENV_LEAKED_SUCCESS
+    volumes:
+      - ./labs.db:/usr/src/app/labs.db
+    restart: always

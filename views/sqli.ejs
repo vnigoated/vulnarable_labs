@@ -1,0 +1,42 @@
+<div class="card" style="max-width: 500px; margin: 0 auto;">
+    <div
+        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #0f0; padding-bottom: 1rem; margin-bottom: 1rem;">
+        <h2>ADMIN LOGIN</h2>
+        <button class="btn" onclick="showManual('SQL Injection', `<%= manual %>`)">MISSION BRIEFING</button>
+    </div>
+
+    <% if (user) { %>
+        <div class="text-alert" style="text-align: center; border: 2px dashed #0f0; padding: 2rem;">
+            <h3>ACCESS GRANTED</h3>
+            <p>Welcome, <%= user.username %>!</p>
+            <p>Role: <%= user.role %>
+            </p>
+            <p>Bio: <%= user.bio %>
+            </p>
+            <a href="/lab/sqli" class="btn">LOGOUT</a>
+        </div>
+        <% } else { %>
+            <form action="/lab/sqli/login" method="POST">
+                <% if (error) { %>
+                    <div
+                        style="background: #330000; color: #ff003c; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ff003c;">
+                        ERROR: <%= error %>
+                    </div>
+                    <% } %>
+
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem;">USERNAME</label>
+                            <input type="text" name="username"
+                                style="width: 100%; padding: 0.5rem; background: #000; border: 1px solid #0f0; color: #0f0; font-family: inherit;">
+                        </div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem;">PASSWORD</label>
+                            <input type="password" name="password"
+                                style="width: 100%; padding: 0.5rem; background: #000; border: 1px solid #0f0; color: #0f0; font-family: inherit;">
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%;">AUTHENTICATE</button>
+            </form>
+            <% } %>
+</div>

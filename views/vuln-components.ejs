@@ -1,0 +1,26 @@
+<div class="card">
+    <div
+        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #0f0; padding-bottom: 1rem; margin-bottom: 1rem;">
+        <h2>ADVANCED CALCULATOR</h2>
+        <button class="btn" onclick="showManual('Vulnerable Components', `<%= manual %>`)">MISSION BRIEFING</button>
+    </div>
+
+    <p>Perform complex mathematical operations using our cloud engine.</p>
+
+    <div style="margin-top: 2rem;">
+        <form action="/lab/vuln-components" method="POST">
+            <div style="display: flex; gap: 0.5rem;">
+                <input type="text" name="expression" placeholder="e.g. 10 * 10"
+                    style="flex-grow: 1; padding: 1rem; background: #000; border: 1px solid #0f0; color: #0f0; font-family: inherit; font-size: 1.5rem;">
+                <button type="submit" class="btn">CALCULATE</button>
+            </div>
+        </form>
+    </div>
+
+    <% if (result) { %>
+        <div style="margin-top: 2rem; border: 1px solid #0f0; padding: 1rem;">
+            <h3>RESULT:</h3>
+            <pre style="font-size: 1.2rem; white-space: pre-wrap;"><%= result %></pre>
+        </div>
+        <% } %>
+</div>

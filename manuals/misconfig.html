@@ -1,0 +1,37 @@
+<div id="step-0">
+    <h3 class="text-dim">[ PHASE 1: DISCOVERY ]</h3>
+
+    <h4>THEORY: VERBOSE ERRORS</h4>
+    <p>Developers often leave debug mode enabled in production. When an error occurs, the server might return a full
+        stack trace or even environment variables.</p>
+
+    <h4>OBJECTIVE</h4>
+    <p>Trigger an error and find hidden secrets in the debug output.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-1', this)">[ UNLOCK HINT 1 ]</button>
+
+<div id="step-1" class="hidden-section">
+    <h4>HINT 1: TRIGGERING ERRORS</h4>
+    <p>The "System Diagnostics" panel has a button "RUN SYSTEM CHECK". This button seems to fail intentionally.</p>
+    <p>Click it and carefully read the output.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-2', this)">[ UNLOCK HINT 2 ]</button>
+
+<div id="step-2" class="hidden-section">
+    <h4>HINT 2: ENVIRONMENT VARIABLES</h4>
+    <p>Look for a section labeled <strong>DEBUG CONTEXT</strong> or similar. In Node.js, <code>process.env</code>
+        contains sensitive keys.</p>
+</div>
+
+<button class="hint-btn text-alert" onclick="reveal('step-3', this)">[ REVEAL SOLUTION ]</button>
+
+<div id="step-3" class="hidden-section" style="border-color: var(--sovap-alert);">
+    <h4 class="text-alert">FULL EXECUTION PLAN</h4>
+    <ol>
+        <li>Click "RUN SYSTEM CHECK".</li>
+        <li>Scroll down to the yellow text section.</li>
+        <li>Look for keys like <code>API_KEY</code> or <code>SECRET</code> inside the JSON dump.</li>
+    </ol>
+</div>

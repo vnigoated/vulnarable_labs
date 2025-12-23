@@ -1,0 +1,60 @@
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div
+        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #0f0; padding-bottom: 1rem; margin-bottom: 1rem;">
+        <h2>SOVAP BLACK MARKET</h2>
+        <button class="btn" onclick="showManual('Insecure Design', `<%= manual %>`)">MISSION BRIEFING</button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <div>
+            <h3>ITEM: NEURAL LINK v9</h3>
+            <p>Direct brain-machine interface. Restricted access.</p>
+            <h1 style="color: #fff; font-size: 3rem;">$<%= price %>
+            </h1>
+            <p class="text-dim">Base Price: $<%= basePrice %>
+            </p>
+
+            <div style="margin-top: 2rem;">
+                <form action="/lab/insecure-design/apply" method="POST">
+                    <label>DISCOUNT CODE</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" name="code" placeholder="ENTER CODE"
+                            style="flex-grow: 1; padding: 0.5rem; background: #000; border: 1px solid #0f0; color: #0f0; font-family: inherit;">
+                        <button type="submit" class="btn">APPLY</button>
+                    </div>
+                </form>
+                <div style="margin-top: 0.5rem;">
+                    <small class="text-dim">Try: 'SAVE10' (10% Off)</small>
+                </div>
+            </div>
+
+            <form action="/lab/insecure-design?reset=true" method="GET" style="margin-top: 1rem;">
+                <button class="btn btn-danger">RESET CART</button>
+            </form>
+        </div>
+
+        <div style="border-left: 1px dashed #0f0; padding-left: 2rem;">
+            <h3>RECEIPT</h3>
+            <% if (coupons.length> 0) { %>
+                <ul style="list-style: none; padding: 0;">
+                    <% coupons.forEach(c=> { %>
+                        <li style="margin-bottom: 0.5rem; border-bottom: 1px solid #333;">[APPLIED] <%= c %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } else { %>
+                    <p>No coupons applied.</p>
+                    <% } %>
+
+                        <% if (price===0) { %>
+                            <div
+                                style="margin-top: 2rem; border: 2px solid #0f0; padding: 1rem; animation: flicker 1s infinite;">
+                                <h3>TRANSACTION APPROVED</h3>
+                                <p>FREE PURCHASE DETECTED.</p>
+                                <p>SHIPPING TO SECTOR-7.</p>
+                                <p>FLAG: SOVAP_FREE_LUNCH</p>
+                            </div>
+                            <% } %>
+        </div>
+    </div>
+</div>

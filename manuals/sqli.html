@@ -1,0 +1,39 @@
+<div id="step-0">
+    <h3 class="text-dim">[ PHASE 1: RECONNAISSANCE ]</h3>
+
+    <h4>THEORY: SQL INJECTION</h4>
+    <p>SQL Injection occurs when untrusted data is concatenated into database queries. Attackers can manipulate the
+        query structure to bypass checks or retrieve data.</p>
+
+    <h4>OBJECTIVE</h4>
+    <p>Login as <strong>admin</strong> without knowing the password.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-1', this)">[ UNLOCK HINT 1 ]</button>
+
+<div id="step-1" class="hidden-section">
+    <h4>HINT 1: QUERY STRUCTURE</h4>
+    <p>The backend likely processes login like this:</p>
+    <pre>SELECT * FROM users WHERE username = '$user' AND password = '$pass'</pre>
+    <p>Your goal is to make this query verify as TRUE even if you don't know the password.</p>
+</div>
+
+<button class="hint-btn" onclick="reveal('step-2', this)">[ UNLOCK HINT 2 ]</button>
+
+<div id="step-2" class="hidden-section">
+    <h4>HINT 2: BOOLEAN LOGIC</h4>
+    <p>If you set the username to something that creates a tautology (always true statement), you can bypass the
+        password check.</p>
+    <p>Try injecting a quote <code>'</code> to close the string, then add <code>OR '1'='1</code>.</p>
+</div>
+
+<button class="hint-btn text-alert" onclick="reveal('step-3', this)">[ REVEAL SOLUTION ]</button>
+
+<div id="step-3" class="hidden-section" style="border-color: var(--sovap-alert);">
+    <h4 class="text-alert">FULL EXECUTION PLAN</h4>
+    <p>Enter the following as the username:</p>
+    <pre>admin' OR '1'='1</pre>
+    <p>This changes the query to:</p>
+    <pre>SELECT * ... WHERE username = 'admin' OR '1'='1' ...</pre>
+    <p>Since <code>'1'='1'</code> is true, the database returns the admin record regardless of the password.</p>
+</div>

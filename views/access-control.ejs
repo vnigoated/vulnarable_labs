@@ -1,0 +1,40 @@
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div
+        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #0f0; padding-bottom: 1rem; margin-bottom: 1rem;">
+        <h2>USER PROFILE</h2>
+        <button class="btn" onclick="showManual('Broken Access Control', `<%= manual %>`)">MISSION BRIEFING</button>
+    </div>
+
+    <div class="profile-pic"
+        style="width: 100px; height: 100px; background: #003300; border: 2px solid #0f0; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 3rem;">👤</span>
+    </div>
+
+    <div class="profile-details">
+        <p><strong>NAME:</strong> <span class="text-dim">
+                <%= profile.name %>
+            </span></p>
+        <p><strong>ROLE:</strong> <span class="text-dim">
+                <%= profile.role %>
+            </span></p>
+        <p><strong>USER ID:</strong> <span class="text-dim">
+                <%= user_id %>
+            </span></p>
+        <p><strong>BIO:</strong> <span class="text-dim">
+                <%= profile.bio %>
+            </span></p>
+
+        <% if (profile.secret) { %>
+            <div style="margin-top: 2rem; border: 1px dashed orange; padding: 1rem;">
+                <strong style="color: orange;">[ PRIVATE DATA DETECTED ]</strong>
+                <p>
+                    <%= profile.secret %>
+                </p>
+            </div>
+            <% } %>
+    </div>
+</div>
+
+<div class="mt-4" style="text-align: center;">
+    <p class="text-dim">DEBUG INFO: Authenticated via 'profile_view_token' cookie.</p>
+</div>
