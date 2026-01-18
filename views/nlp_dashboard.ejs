@@ -1,0 +1,31 @@
+<div class="row mb-4">
+    <div class="col-md-12 text-center">
+        <h1 class="display-4"><i class="fas fa-brain"></i> NLP Curriculum</h1>
+        <p class="lead">Master Natural Language Processing with interactive Jupyter Notebooks.</p>
+    </div>
+</div>
+
+<div class="row">
+    <% labs.forEach(function(lab) { %>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-secondary border-primary">
+                <div class="card-header bg-dark border-primary">
+                    <h5 class="card-title mb-0">
+                        <%= lab.title %>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <%= lab.description %>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="badge bg-info text-dark">
+                            <%= lab.difficulty %>
+                        </span>
+                        <a href="/lab/nlp/<%= lab.id %>" class="btn btn-primary btn-sm">Start Lab</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+</div>

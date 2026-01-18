@@ -253,7 +253,49 @@ router.post('/vuln-components', (req, res) => {
     });
 });
 
+
+// ==========================================
+// 7. NLP Labs (JupyterLite Integration)
+// ==========================================
+
+const nlpLabs = [
+    { id: 'text-basics', file: '01-text-basics.ipynb', title: '1. Text Basics', description: 'String manipulation and Regex.', difficulty: 'Beginner' },
+    { id: 'preprocessing', file: '02-preprocessing.ipynb', title: '2. Preprocessing', description: 'Tokenization, Stemming, Stopwords.', difficulty: 'Beginner' },
+    { id: 'vectorization', file: '03-vectorization.ipynb', title: '3. Vectorization', description: 'Bag of Words and TF-IDF.', difficulty: 'Intermediate' },
+    { id: 'classification', file: '04-classification.ipynb', title: '4. Classification', description: 'Spam Filtering with Naive Bayes.', difficulty: 'Intermediate' },
+    { id: 'topic-modeling', file: '05-topic-modeling.ipynb', title: '5. Topic Modeling', description: 'Extracting themes with NMF.', difficulty: 'Advanced' },
+    { id: 'embeddings', file: '06-embeddings.ipynb', title: '6. Word Embeddings', description: 'Word2Vec and Semantic Similarity.', difficulty: 'Advanced' },
+    { id: 'sentiment', file: '07-sentiment-analysis.ipynb', title: '7. Sentiment Analysis', description: 'Positive vs Negative detection.', difficulty: 'Intermediate' },
+    { id: 'ner', file: '08-ner.ipynb', title: '8. NER', description: 'Named Entity Recognition.', difficulty: 'Intermediate' },
+    { id: 'resume-parser', file: '09-resume-parser.ipynb', title: '9. Project: Resume Parser', description: 'Extract skills from resumes.', difficulty: 'Capstone' },
+    { id: 'neural-net', file: '10-neural-network.ipynb', title: '10. Neural Networks', description: 'Build a Perceptron from scratch.', difficulty: 'Capstone' },
+    { id: 'text-gen', file: '11-text-generation.ipynb', title: '11. Text Generation', description: 'Autocomplete using N-Grams.', difficulty: 'Capstone' }
+];
+
+// Dashboard
+router.get('/nlp', (req, res) => {
+    res.render('nlp_dashboard', {
+        title: 'NLP Curriculum',
+        labs: nlpLabs
+    });
+});
+
+// Specific Lab
+router.get('/nlp/:id', (req, res) => {
+    const labId = req.params.id;
+    const lab = nlpLabs.find(l => l.id === labId);
+
+    if (!lab) {
+        return res.status(404).render('error', { message: "Lab not found" });
+    }
+
+    const manual = `<h3>${lab.title}</h3><p>${lab.description}</p>`;
+
+    res.render('nlp', {
+        title: lab.title,
+        manual: manual,
+        notebookFile: lab.file
+    });
+});
+
 module.exports = router;
-
-
-
