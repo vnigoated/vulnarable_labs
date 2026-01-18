@@ -8,9 +8,11 @@ COPY package*.json ./
 RUN npm install
 
 # Install Python3 and build JupyterLite assets
-RUN apk add --no-cache python3 py3-pip
+# build-base and libffi-dev needed for some python wheels
+RUN apk add --no-cache python3 py3-pip build-base libffi-dev
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
-RUN pip3 install jupyterlite-core jupyterlite-pyodide-kernel
+# Install jupyter-server and notebook as they are required for the build process
+RUN pip3 install jupyterlite-core jupyterlite-pyodide-kernel jupyter-server notebook
 
 # Bundle app source
 COPY . .
