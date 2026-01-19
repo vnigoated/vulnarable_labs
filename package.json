@@ -1,7 +1,7 @@
 {
-  "name": "sovap-cyberlabs",
+  "name": "cybercoach",
   "version": "1.0.0",
-  "description": "Vulnerable Web App for SOVAP",
+  "description": "Vulnerable Web App for CyberCoach",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

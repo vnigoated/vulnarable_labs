@@ -14,6 +14,22 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Middleware to restrict access to specific referrer
+app.use((req, res, next) => {
+    const allowedReferer = 'https://vois-cybercoach.vercel.app/';
+    const referer = req.get('Referer');
+    const host = req.get('host');
+
+    // Allow usage if:
+    // 1. It's coming from the allowed Vercel app
+    // 2. It's running locally (localhost) for development
+    if ((referer && referer.startsWith(allowedReferer)) || (host && host.includes('localhost'))) {
+        next();
+    } else {
+        res.status(403).send('Access Denied: This lab can only be accessed via https://vois-cybercoach.vercel.app/');
+    }
+});
+
 // Routes
 const indexRouter = require('./routes/index');
 const labsRouter = require('./routes/labs');
@@ -23,5 +39,5 @@ app.use('/lab', labsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`SOVAP CyberLabs Server running on http://localhost:${PORT}`);
+    console.log(`CyberCoach Server running on http://localhost:${PORT}`);
 });

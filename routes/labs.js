@@ -40,7 +40,7 @@ router.get('/access-control', (req, res) => {
     // Simulated DB lookup
     let profiles = {
         101: { name: "Guest User", role: "Basic", bio: "Just looking around.", secret: "Nothing to see here." },
-        102: { name: "SOVAP ADMIN", role: "SuperAdmin", bio: "The Owner.", secret: "FLAG: SOVAP_IDOR_MASTER_KEY" },
+        102: { name: "CYBERCOACH ADMIN", role: "SuperAdmin", bio: "The Owner.", secret: "FLAG: CYBERCOACH_IDOR_MASTER_KEY" },
         103: { name: "Employee 42", role: "User", bio: "Working hard.", secret: "My lunch is in the fridge." }
     };
 
@@ -74,7 +74,7 @@ router.get('/crypto', (req, res) => {
 
     const notes = [
         { id: 1, owner: 'guest', content: xorEncrypt("Grocery list: Milk, Eggs, hack_the_planet", SECRET_KEY) },
-        { id: 2, owner: 'admin', content: xorEncrypt("FLAG: SOVAP_CRYPTO_BREAK_SUCCESS", SECRET_KEY) }
+        { id: 2, owner: 'admin', content: xorEncrypt("FLAG: CYBERCOACH_CRYPTO_BREAK_SUCCESS", SECRET_KEY) }
     ];
 
     const manual = getManual('crypto');

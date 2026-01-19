@@ -24,8 +24,8 @@ RUN python3 -m jupyter lite build --contents content --output-dir public/jupyter
 EXPOSE 3000
 
 # Set environment variables (These are the secrets for the Misconfig lab)
-ENV SOVAP_API_KEY="sk_live_892348572345"
-ENV SOVAP_ADMIN_SECRET="SuperSecretBackdoorKey"
+ENV CYBERCOACH_API_KEY="sk_live_892348572345"
+ENV CYBERCOACH_ADMIN_SECRET="SuperSecretBackdoorKey"
 ENV NODE_ENV="production"
 
 # Start the server
