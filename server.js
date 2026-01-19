@@ -21,9 +21,9 @@ app.use((req, res, next) => {
     const host = req.get('host');
 
     // Allow usage if:
-    // 1. It's coming from the allowed Vercel app
+    // 1. It's coming from the allowed Vercel app (flexible check)
     // 2. It's running locally (localhost) for development
-    if ((referer && referer.startsWith(allowedReferer)) || (host && host.includes('localhost'))) {
+    if ((referer && referer.includes('vois-cybercoach.vercel.app')) || (host && host.includes('localhost'))) {
         next();
     } else {
         res.status(403).send('Access Denied: This lab can only be accessed via https://vois-cybercoach.vercel.app/');
